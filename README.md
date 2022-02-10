@@ -56,7 +56,7 @@ The subdirectory [docker](docker) provides Dockerfiles for [Avahi Publisher](doc
 
 ## Installation on a Raspberry Pi
 ```
-- Install avahi-utils (not really necessary but facilitates things with avahi-resolve and avahi-publish, etc.)
+- Install avahi-utils (not really necessary but facilitates things when testing with avahi-resolve and avahi-publish, etc.)
 		sudo apt-get install avahi-utils
 - Install required phyton modules
 		sudo apt-get install python3-pip
