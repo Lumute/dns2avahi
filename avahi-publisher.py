@@ -165,7 +165,7 @@ def run():
             zone = dns.zone.from_xfr(dns.query.xfr(DNS_SERVER, domain, relativize=False), relativize=False)
 
             SOARecord = zone.get_rdataset(domain, 'SOA')
-            if SOARecord == None
+            if SOARecord == None:
                 SOARecord = zone.get_rdataset(domain + '.', 'SOA')
             serial = SOARecord[0].serial
             if serial == serials.get(domain, None):
