@@ -1,3 +1,10 @@
+# Thanks
+
+mDNS appropriated the .local tld long after Microsoft pushed it who people as a good practice to build company domains, a lot of companies out there still using .local domains. Renaming a Windows domain although possible is a huge undertake with lots of implications. Now that OSs (like Android 12) started exclusively using mDNS for .local resolution this is a bigger issue and this code is the perfect workaround.
+
+This is a fork of [Jan Janak's dns2avahi](https://github.com/janakj/dns2avahi) (Thanks a lot Jan) with some minor changes to support Windows DNS Servers and a bit of logic to support pulling multiple domains each from a separate DNS Server (optional). Also added a couple of files to install it as a service on a Raspberry Pi.
+
+
 # DNS to Avahi Gateway
 
 This project provides tools to publish and resolve ordinary DNS zones in multicast DNS via [Avahi](https://www.avahi.org). The [`avahi-publisher`](avahi-publisher.py) program downloads an entire DNS zone from the DNS server and publishes all its resource records to multicast DNS via the local Avahi daemon instance. The [`avahi-resolver`](avahi-resolver.py) program implements an extension module for the [Unbound](https://www.nlnetlabs.nl/projects/unbound/about/) DNS resolver that can be used to lookup ordinary DNS queries in multicast DNS via Avahi.
@@ -45,3 +52,29 @@ The behavior of the plugin can be controlled via a number of environment variabl
 ## Docker Containers
 
 The subdirectory [docker](docker) provides Dockerfiles for [Avahi Publisher](docker/Dockerfile.publisher) and [Unbound with Python 3](docker/Dockerfile.unbound) support enabled.
+
+
+## Installation on a Raspberry Pi
+
+- Install avahi-utils (not really necessary but facilitates things with avahi-resolve and avahi-publish, etc.) link
+		sudo apt-get install avahi-utils
+- Install required phyton modules
+		sudo apt-get install python3-pip
+		sudo pip3 install pydbus
+		sudo pip3 install dnspython
+- Install avahi-publisher
+		mkdir dns2avahi
+		cd dns2avahi
+		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/avahi-publisher.py
+		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/avahi.py
+- Configure it to run as a system service
+		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/dns2avahi.sh
+		vi dns2avahi.sh           (edit and modify the execution command as needed with your domain/s and dns server/s)
+		dnsh dns2avahi.sh         (Test that it runs fine)
+		cd /etc/systemd/system
+		sudo wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/systemd/dns2avahi.service
+		sudo vi dns2avahi.service
+		sudo systemctl start dns2avahi
+		sudo systemctl enable dns2avahi
+		
+
