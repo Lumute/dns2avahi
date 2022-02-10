@@ -55,6 +55,9 @@ The subdirectory [docker](docker) provides Dockerfiles for [Avahi Publisher](doc
 
 
 ## Installation on a Raspberry Pi
+
+I'm not a Linux expert so there may be better / easier ways to do this, but this is what worked for me:
+
 ```
 - Install avahi-utils (not really necessary but facilitates things when testing with avahi-resolve and avahi-publish, etc.)
 		sudo apt-get install avahi-utils
