@@ -2,7 +2,7 @@
 
 mDNS appropriated the .local tld long after Microsoft spent years pushuing it who people as a good practice to build company domains, a lot of companies out there still using .local domains. Renaming a Windows domain although possible is a huge undertake with lots of implications and possible unforseen problems. Now that OSs (like Android 12) started exclusively using mDNS for .local resolution this is a bigger issue and this code is the perfect workaround.
 
-This is a fork of [Jan Janak's dns2avahi](https://github.com/janakj/dns2avahi) (Thanks a lot Jan) with some minor changes to support Windows DNS Servers and a bit of logic to support for separate DNS Server when pulling multiple domains (one each, optional). Also added a couple of files to install it as a service on a Raspberry Pi.
+This is a fork of [Jan Janak's dns2avahi](https://github.com/janakj/dns2avahi) (Thanks a lot Jan) with some minor changes to support Windows DNS Servers and a bit of logic to support for separate DNS Servers when pulling multiple domains (one each, optional). Also added a couple of files to install it as a service on a Raspberry Pi.
 
 
 # DNS to Avahi Gateway
