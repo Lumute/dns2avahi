@@ -57,24 +57,24 @@ The subdirectory [docker](docker) provides Dockerfiles for [Avahi Publisher](doc
 ## Installation on a Raspberry Pi
 
 - Install avahi-utils (not really necessary but facilitates things with avahi-resolve and avahi-publish, etc.) link
-		sudo apt-get install avahi-utils
+```		sudo apt-get install avahi-utils```
 - Install required phyton modules
-		sudo apt-get install python3-pip
+```		sudo apt-get install python3-pip
 		sudo pip3 install pydbus
-		sudo pip3 install dnspython
+		sudo pip3 install dnspython```
 - Install avahi-publisher
-		mkdir dns2avahi
+```		mkdir dns2avahi
 		cd dns2avahi
 		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/avahi-publisher.py
-		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/avahi.py
+		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/avahi.py```
 - Configure it to run as a system service
-		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/dns2avahi.sh
+```		wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/dns2avahi.sh
 		vi dns2avahi.sh           (edit and modify the execution command as needed with your domain/s and dns server/s)
 		dnsh dns2avahi.sh         (Test that it runs fine)
 		cd /etc/systemd/system
 		sudo wget https://raw.githubusercontent.com/Lumute/dns2avahi/main/systemd/dns2avahi.service
 		sudo vi dns2avahi.service
 		sudo systemctl start dns2avahi
-		sudo systemctl enable dns2avahi
+		sudo systemctl enable dns2avahi```
 		
 
