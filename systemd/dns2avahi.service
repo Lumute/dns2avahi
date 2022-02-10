@@ -1,0 +1,10 @@
+[unit]
+Description=Pulls DNS Zones and publishes them on avahi so they can be queried using mDNS
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=sh /home/pi/dns2avahi/dns2avahi.sh
+
+[Install]
+WantedBy=multi-user.target
