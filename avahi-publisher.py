@@ -18,7 +18,7 @@ from time import sleep
 from typing import cast
 
 DEBUG          = os.environ.get('DEBUG', None)
-DNS_SERVER     = os.environ['DNS_SERVER']
+DNS_SERVERS    = os.environ['DNS_SERVER'].split(' ')
 DOMAINS        = os.environ['DOMAINS'].split(' ')
 LISTEN_ADDRESS = os.environ.get('LISTEN_ADDRESS', '127.0.0.1')
 LISTEN_PORT    = int(os.environ.get('LISTEN_PORT', 53535))
@@ -162,6 +162,13 @@ def run():
 
     while True:
         for domain in DOMAINS:
+            
+            # If more than 1 DNS server is passed, then it will use the corresponding one, otherwise it will use the only one passed for all domains.
+            if len(DNS_SERVERS) > 1:
+                DNS_SERVER = DNS_SERVERS[DOMAINS.index(domain)]
+            else:
+                DNS_SERVER = DNS_SERVERS[0]
+            
             zone = dns.zone.from_xfr(dns.query.xfr(DNS_SERVER, domain, relativize=False), relativize=False)
 
             SOARecord = zone.get_rdataset(domain, 'SOA')
@@ -206,7 +213,7 @@ if __name__ == '__main__':
     avahi_daemon = AvahiDaemon()
     print("avahi-publisher: Connected to Avahi Daemon: %s (API %s) [%s]"
           % (avahi_daemon.version, avahi_daemon.apiVersion, avahi_daemon.fqdn))
-    print("avahi-publisher: Transferring zones %s from %s" % (repr(DOMAINS), DNS_SERVER))
+    print("avahi-publisher: Transferring zones %s from %s" % (repr(DOMAINS), repr(DNS_SERVERS)))
     start_notify_listener()
 
     run()
