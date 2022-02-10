@@ -164,7 +164,10 @@ def run():
         for domain in DOMAINS:
             zone = dns.zone.from_xfr(dns.query.xfr(DNS_SERVER, domain, relativize=False), relativize=False)
 
-            serial = zone.get_rdataset(domain + '.', 'SOA')[0].serial
+            SOARecord = zone.get_rdataset(domain, 'SOA')
+            if SOARecord == None
+                SOARecord = zone.get_rdataset(domain + '.', 'SOA')
+            serial = SOARecord[0].serial
             if serial == serials.get(domain, None):
                 continue
             serials[domain] = serial
